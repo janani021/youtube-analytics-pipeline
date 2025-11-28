@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 
 s3 = boto3.client("s3")
 
-# Environment variables (we will set these in AWS Lambda, not in code)
+# Will set the variables in Lambda
 YOUTUBE_API_KEY = os.environ["YOUTUBE_API_KEY"]
 CHANNEL_ID = os.environ["CHANNEL_ID"]
 S3_BUCKET = os.environ["S3_BUCKET"]
@@ -21,7 +21,7 @@ def lambda_handler(event, context):
     - Saves the JSON response into S3 under a raw/ path
     """
 
-    # 1) Call YouTube API to get channel details
+    # Call YouTube API to get channel details
     params = {
         "part": "snippet,statistics,contentDetails",
         "id": CHANNEL_ID,
@@ -32,18 +32,18 @@ def lambda_handler(event, context):
     response.raise_for_status()  # raises error if API call failed
     channel_data = response.json()
 
-    # 2) Build an S3 key with a timestamp
+    # Build an S3 key with a timestamp
     run_ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     s3_key = f"raw/youtube/channel={CHANNEL_ID}/run_ts={run_ts}.json"
 
-    # 3) Upload JSON to S3
+    # Upload JSON to S3
     s3.put_object(
         Bucket=S3_BUCKET,
         Key=s3_key,
         Body=json.dumps(channel_data).encode("utf-8"),
     )
 
-    # 4) Return a simple success message
+    # Return a simple success message
     return {
         "statusCode": 200,
         "body": json.dumps({"message": "success", "s3_key": s3_key}),
