@@ -1,0 +1,54 @@
+YouTube Channel Performance Dashboard 
+
+This dashboard provides a view of how the YouTube channel  (MKBHD) performed over the most recent time. 
+
+
+The goal is to understand:
+- How the channel performed today vs yesterday
+- Which videos contributed most to growth
+- Which videos are trending right now
+- Overall engagement of the channel
+
+1. KPI Summary Row
+The KPI row shows three key performance:
+- Total Views
+- Total Likes
+- Overall Engagement Rate
+
+Each KPI includes:
+- Latest day’s total value
+- Up/Down arrow showing if the metric improved vs previous day
+- Percentage change vs previous day
+
+2. Daily View Change (Last 7 Days)
+Instead of showing total views per day, this focuses on the actual daily increase or decrease in views*.
+
+This helps answer:
+- How many views did we gain today?
+- Whether the channel is trending up or down recently
+
+3. Video Stats 
+This section displays each video's latest stats as a combination of bars and a heat-style layout. 
+For each video, it shows:
+- View Count
+- Like Count
+- Engagement Rate
+
+You can easily compare videos and see which ones have strong engagement even if views are lower.
+
+4. Top 5 Videos
+This highlights the top 5 videos based on total view count. 
+
+- Which topics are attracting the most with the audience
+
+
+5. Trending Videos (Last 7 Days)
+This lollipop-style visualization shows the videos that gained the most views in the past 7 days.
+It highlights the videos that are currently trending or getting more attention.
+
+It helps answer:
+- "What are viewers watching the most this week?"
+- "Which videos should we focus on or promote?"
+
+
+
