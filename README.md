@@ -11,7 +11,8 @@ This is a simple data engineering project that uses AWS Lambda to fetch data fro
 
 
 ## Lambda Functions 
-1] `lambda_injest/lambda_function.py` – Ingestion Lambda: calls YouTube API and stores raw JSON in S3 under `raw/`.
+# 1] `lambda_injest/lambda_function.py` 
+ Ingestion Lambda: calls YouTube API and stores raw JSON in S3 under `raw/`.
 
 # Environment Variables (set in Lambda, not in code)
 
@@ -26,7 +27,8 @@ This is a simple data engineering project that uses AWS Lambda to fetch data fro
 - Saves the raw JSON response into an S3 bucket under a `raw/` folder
 - Can be triggered manually or on a schedule (via EventBridge)
 
-2] `lambda_transform/lambda_function.py` – Transform Lambda: triggered by S3, reads raw JSON and writes a curated CSV under `curated/`.
+# 2] `lambda_transform/lambda_function.py` –
+ Transform Lambda: triggered by S3, reads raw JSON and writes a curated CSV under `curated/`.
 
 # Environment Variables (set in Lambda, not in code)
 - `S3_BUCKET` – the name of the S3 bucket where data will be stored
@@ -99,3 +101,17 @@ This allows Snowflake to assume your role securely.
 4. Grant Snowflake Role Access to the Integration
 GRANT USAGE ON INTEGRATION yt_s3_int TO ROLE SYSADMIN;
 This allows your Snowpipe + stages to actually use the integration.
+
+5. Create an External Stage in Snowflake
+The stage points Snowflake to your S3 bucket using the storage integration.
+
+6. Create the Snowpipe to Auto-Load Data
+This Snowpipe continuously listens for new files in s3://yt-analytics-021/curated/
+and automatically loads them into the youtube_channel_stats table
+
+
+## Tableau Dashboard 
+
+![YouTube Channel Performance Dashboard](tableau/image.png)
+
+- **Workbook file:** `tableau/YouTube_Channel_Performance.twb`
